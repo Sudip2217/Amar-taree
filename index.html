@@ -2,396 +2,228 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Amar Taree Cottage — for Sale </title>
-  <link rel="icon" href="img/Logo 3.jpg" />
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <style>
-    :root{
-      --accent:#f1c40f;
-      --dark-700: rgba(0,0,0,0.65);
-      --glass: rgba(255,255,255,0.06);
-      --card-bg: #ffffff;
-      --text:#0b1221;
-      --muted:#6b7280;
-    }
-
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      color:var(--text);
-      background:#f5f7fb;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-    }
-
-    /* --- Video hero --- */
-    .hero{
-      position:relative;
-      min-height:70vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      overflow:hidden;
-    }
-
-    .hero video{
-      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:brightness(0.55);
-    }
-
-    .hero .overlay{position:relative;z-index:2;max-width:1200px;padding:4rem 1.5rem;text-align:left}
-
-    .brand{display:flex;gap:16px;align-items:center;margin-bottom:8px}
-    .brand img{width:64px;height:64px;border-radius:10px;object-fit:cover}
-    h1{font-size:2.2rem;margin-bottom:0.25rem}
-    p.lead{color:rgba(255,255,255,0.9);margin-bottom:1rem}
-
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:0.7rem 1rem;border-radius:10px;border:none;cursor:pointer;font-weight:600}
-    .btn-primary{background:var(--accent);color:#111}
-    .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.18)}
-
-    /* info card on hero */
-    .hero-card{margin-top:1rem;background:rgba(255,255,255,0.06);backdrop-filter:blur(6px);padding:1rem;border-radius:12px;display:flex;gap:1rem;align-items:center}
-    .hero-card .price{font-weight:700;font-size:1.1rem}
-    .hero-card small{color:rgba(255,255,255,0.8)}
-
-    /* Main content */
-    .container{max-width:1200px;margin:2rem auto;padding:0 1rem}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:2rem}
-
-    /* Gallery */
-    .gallery{background:var(--card-bg);padding:1rem;border-radius:12px;box-shadow:0 8px 30px rgba(12,15,20,0.06)}
-    .gallery .main-img{width:100%;height:420px;border-radius:10px;overflow:hidden}
-    .gallery .main-img img{width:100%;height:100%;object-fit:cover;display:block}
-    .thumbs{display:flex;gap:8px;margin-top:0.8rem}
-    .thumbs img{width:72px;height:72px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent}
-    .thumbs img.active{border-color:var(--accent)}
-
-    /* Details */
-    .details{background:var(--card-bg);padding:1.25rem;border-radius:12px;box-shadow:0 8px 30px rgba(12,15,20,0.06)}
-    .meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1rem}
-    .meta .chip{background:var(--glass);padding:0.45rem 0.6rem;border-radius:999px;font-weight:600}
-    .price-section{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
-    .price-big{font-size:1.5rem;font-weight:800}
-    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:1rem}
-    .feature{background:#f8fafc;padding:0.6rem;border-radius:8px;font-weight:600;color:var(--muted)}
-
-    /* Description */
-    .desc{margin-top:1rem;color:#334155}
-
-    /* Contact card */
-    .contact-card{position:sticky;top:20px}
-    .contact-card .card{padding:1rem;border-radius:12px;background:linear-gradient(180deg,#ffffff,#fcfcfd);box-shadow:0 12px 30px rgba(12,15,20,0.06)}
-    .contact-card h3{margin-bottom:0.5rem}
-    .contact-card form{display:flex;flex-direction:column;gap:0.6rem}
-    .contact-card input,.contact-card textarea{padding:0.65rem;border-radius:8px;border:1px solid #e6e9ef}
-    .contact-card .small{font-size:0.85rem;color:var(--muted)}
-
-    /* Amenities strip */
-    .amenities{display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem}
-    .amenity{background:#fff;padding:0.6rem 0.8rem;border-radius:8px;display:flex;gap:8px;align-items:center;box-shadow:0 6px 20px rgba(12,15,20,0.04)}
-
-    /* Footer */
-    footer{margin-top:3rem;padding:2rem 1rem;background:#0b1221;color:#cbd5e1}
-    footer .wrap{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;gap:1rem;align-items:center}
-
-    /* Modal */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.5);z-index:60}
-    .modal.show{display:flex}
-    .modal .panel{background:#fff;padding:1.25rem;border-radius:12px;width:420px;max-width:92%}
-
-    /* responsive */
-    @media (max-width:980px){
-      .grid{grid-template-columns:1fr}
-      .contact-card{position:relative}
-      .hero{min-height:60vh}
-      h1{font-size:1.75rem}
-    }
-
-    @media (max-width:420px){
-      .hero .overlay{padding:2rem 1rem}
-      .gallery .main-img{height:260px}
-      .thumbs img{width:56px;height:56px}
-    }
-
-/* Keep container padding balanced */
-.container {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1.25rem;
-}
-
-/* Map + location section better spacing and wrapping */
-section[style*="margin-top:2rem"][style*="box-shadow"] > div {
-  align-items: flex-start;
-}
-
-/* Responsive map section */
-@media (max-width: 900px) {
-  section[style*="margin-top:2rem"][style*="box-shadow"] > div {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  section[style*="margin-top:2rem"][style*="box-shadow"] iframe {
-    width: 100% !important;
-    height: 250px !important;
-  }
-
-  section[style*="margin-top:2rem"][style*="box-shadow"] > div > div:first-child {
-    max-width: 100%;
-  }
-}
-
-/* Contact form & right column alignment fix */
-@media (max-width: 980px) {
-  .grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .contact-card {
-    width: 100%;
-    position: relative;
-  }
-
-  .contact-card .card {
-    width: 100%;
-  }
-}
-
-/* Footer alignment & wrapping */
-footer .wrap {
-  flex-wrap: wrap;
-  text-align: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>আমার তরী নিজের বাড়ি — Luxury Cottage</title>
+  <meta name="description" content="Amar Tori — Luxury cottages. Book whole cottage or individual floors.">
+  <link rel="icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HERO with background video -->
+  <!-- TOP PROGRESS -->
+  <div id="progressBar"></div>
+
+  <!-- GLOBAL AURORA BACKDROP -->
+  <div class="bg-aurora" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="img/logo.png" alt="logo" class="brand-logo">
+      <div class="brand-text">
+        <div class="small">আমার তরী নিজের বাড়ি</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="#floors">Floors & Rates</a>
+      <a href="#whole">Full Cottage</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact" class="cta">Book Now</a>
+    </nav>
+
+    <button id="menuToggle" class="menu-btn" aria-label="menu">☰</button>
+  </header>
+
+  <main>
+
+  <!-- HERO -->
   <section class="hero">
-    <video> 
+    <video class="hero-video" autoplay muted loop playsinline poster="img/Poster.jpg">
       <source src="img/Video 1.mp4" type="video/mp4">
-      <!-- If user doesn't want video, replace with an image or keep poster -->
     </video>
 
-    <div class="overlay">
-      <div class="brand">
-        <img src="img/Logo 3.jpg" alt="logo">
-        <div>
-          <div style="font-size:13px;color:rgba(255,255,255,0.85);letter-spacing:1px">Amar Taree — Property Showcase</div>
-          <h1>Beautiful 2‑BHK Cottage</h1>
+    <div class="hero-veil"></div>
+
+    <!-- Decorative orbs -->
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <h1 class="hero-head"><span>আমার তরী নিজের বাড়ি</span></h1>
+      <div class="hero-actions">
+        <a href="#floors" class="btn btn-primary">View Floors & Rates</a>
+        <a href="#whole" class="btn btn-ghost">Full Cottage Info</a>
+      </div>
+
+      <div class="rate-pill">
+        <div class="pill-left">Each floor — different rates</div>
+        <div class="pill-right">Full cottage rate → <strong>₹ 60 Lakh</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOORS (cards with different rates) -->
+  <section id="floors" class="section floors">
+    <div class="section-head">
+      <h2>Each Floor — Different Rate</h2>
+      <p class="muted">Choose a floor to view details and quick booking</p>
+    </div>
+
+    <div class="floors-grid">
+      <article class="floor-card tilt">
+        <div class="floor-badge">Cottage</div>
+        <div class="floor-img" style="background-image:url('img/floor-ground.jpg')"></div>
+        <div class="floor-body">
+        <img src="img/Cottage view 2.jpg" alt="Cottage view 1" width="500" height="300">
+          <p class="muted">Spacious living with direct garden access and parking.</p>
+          <div class="card-actions">
+            <button class="btn-primary book" data-item="Ground Floor">Book</button>
+            <a class="btn btn-ghost" href="index1.html">Details</a>
+          </div>
         </div>
-      </div>
-      <p class="lead">A cozy cottage with private gardens, lake view and modern comforts — perfect for weekend getaways or a permanent retreat.</p>
+      </article>
 
-      <div class="cta-row">
-        <button class="btn btn-primary" id="contactBtn"><i class='bx bx-phone'></i>Contact to Buy</button>
-        <a class="btn btn-ghost" href="#gallery"><i class='bx bx-images'></i>View Gallery</a>
-        <a class="btn" href="#details" style="background:rgba(255,255,255,0.12);color:#fff">See Details</a>
-      </div>
+      <article class="floor-card tilt">
+        <div class="floor-badge">Full Cottage</div>
+        <div class="floor-img" style="background-image:url('img/floor-upper.jpg')"></div>
+        <div class="floor-body">
+       <img src="img/Cottage view 3.jpg" alt="Cottage view 1" width="500" height="300">
+          <p class="muted">Terrace views, airy bedrooms, cozy evenings and private balconies.</p>
+          <div class="price">₹ 60,00,000</div>
+          <div class="card-actions">
+            <button class="btn-primary book" data-item="Upper Floor">Book</button>
+          </div>
+        </div>
+      </article>
 
-      <div class="hero-card">
-        <div>
-          <div class="price">₹ 28,50,000</div>
-          <small>Negotiable • 1.2 acres • Ready to move</small>
+      <article class="floor-card tilt highlight">
+        <div class="floor-badge">White Cottage</div>
+        <div class="floor-img" style="background-image:url('img/floor-white.jpg')"></div>
+        <div class="floor-body">
+        <img src="img/Cottage view 5.jpg" alt="Cottage view 1" width="500" height="300">
+          <p class="muted">Premium finish, private balconies.</p>
+          <div class="price">₹ 66,00,000</div>
+          <div class="card-actions">
+            <button class="btn-primary book" data-item="White Cottage">Book</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FULL COTTAGE HIGHLIGHT -->
+  <section id="whole" class="section whole highlight-block">
+    <div class="whole-card glass">
+      <div class="whole-left">
+        <h2>Full Cottage Booking</h2>
+        <p class="muted">Ideal for retreats & large families. Exclusive use of entire property.</p>
+        <div class="price-big">₹ 60,00,000</div>
+      </div>
+      <div class="whole-right">
+        <ul class="facts">
+          <li>Plot: 1.2 acres</li>
+          <li>Parking: 2 slots per cottage</li>
+          <li>Solar-ready • Rainwater harvesting</li>
+        </ul>
+        <div class="whole-actions">
+          <button class="btn-primary book" data-item="Full Cottage">Enquire</button>
+          <a href="#contact" class="btn-ghost">Contact Agent</a>
         </div>
       </div>
     </div>
   </section>
 
-  <main class="container">
-    <div class="grid">
-      <div>
-        <!-- Gallery -->
-        <section id="gallery" class="gallery">
-          <div class="main-img" id="mainImg">
-            <img src="img/Cottage view 1.jpg" alt="cottage main">
-          </div>
-          <div class="thumbs" id="thumbs">
-            <img src="img/Cottage view 1.jpg" alt="thumb1" class="active">
-            <img src="img/Cottage view 2.jpg" alt="thumb2">
-            <img src="img/Cottage view 3.jpg" alt="thumb3">
-            <img src="img/Cottage view 4.jpg" alt="thumb4">
-            <img src="img/Cottage view 5.jpg" alt="thumb4">
-          </div>
+  <!-- GALLERY -->
+  <section id="gallery" class="section gallery">
+    <h2 class="section-title">Gallery</h2>
+    <div class="masonry">
+      <img src="img/Cottage view 1.jpg" alt="" class="g" loading="lazy">
+      <img src="img/Cottage view 2.jpg" alt="" class="g" loading="lazy">
+      <img src="img/Cottage view 3.jpg" alt="" class="g" loading="lazy">
+      <img src="img/Cottage view 4.jpg" alt="" class="g" loading="lazy">
+      <img src="img/Cottage view 5.jpg" alt="" class="g" loading="lazy">
+    </div>
+  </section>
 
-          <div style="margin-top:1rem;display:flex;gap:12px;align-items:center;justify-content:space-between">
-            <div style="font-weight:700">Photo Gallery</div>
-            <div style="color:var(--muted);font-size:0.95rem"></div>
-          </div>
-        </section>
+  <!-- CONTACT / BOOKING -->
+<section id="contact" class="section contact">
+  <div class="contact-card glass">
+    <h3>Request a Visit / Enquiry</h3>
+    <p class="muted">Fill basic details and our agent will reach out.</p>
 
-        <!-- Details -->
-        <section id="details" class="details" style="margin-top:1.5rem">
-          <div class="meta">
-            <div class="chip">3 Bedrooms</div>
-            <div class="chip">2 Living Rooms</div>
-            <div class="chip">1200 sqft</div>
-            <div class="chip">2 kitchen Ro0ms</div>
-            <div class="chip">Guest Rooms</div>
-            <div class="chip">Swimming Pool</div>
-            <div class="chip">Private Garden</div>
-          </div>
-
-          <div class="price-section">
-            <div>
-              <div style="font-size:14px;color:var(--muted)">Asking Price</div>
-              <div class="price-big">₹ 28,50,000</div>
-            </div>
-            <div style="text-align:right">
-              <div style="color:var(--muted);font-size:13px">Listed by Amar Taree</div>
-              <div style="font-weight:700">Mobile: +91 987654321</div>
-            </div>
-          </div>
-
-          <div class="desc">
-            <h3 style="margin-bottom:8px">About this cottage</h3>
-            <p>Set beside a calm freshwater lake, this beautifully restored cottage blends traditional charm with modern amenities — fully furnished kitchen, solar electrics, rainwater harvesting and a stone fireplace. Well-connected by road and only 2 hours from the city.</p>
-
-            <div class="features">
-              <div class="feature">Lakeside view</div>
-              <div class="feature">Private garden</div>
-              <div class="feature">Solar-ready</div>
-              <div class="feature">Furnished</div>
-            </div>
-
-            <div style="margin-top:1rem">
-              <h4 style="margin-bottom:8px">Location & Highlights</h4>
-              <ul style="color:var(--muted);line-height:1.6">
-                <li> Peaceful rural setting with good road access</li>
-                <li> Nearby market & basic healthcare within 15 minutes</li>
-                <li> Suitable for family, retreat or short‑stay rentals</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <!-- Amenities strip -->
-        <section style="margin-top:1.25rem">
-          <div style="font-weight:700;margin-bottom:0.6rem">Amenities</div>
-          <div class="amenities">
-            <div class="amenity"><i class='bx bx-wifi'></i>&nbsp;Wi‑Fi</div>
-            <div class="amenity"><i class='bx bx-tv'></i>&nbsp;TV</div>
-            <div class="amenity"><i class='bx bx-bolt'></i>&nbsp;Solar-ready</div>
-            <div class="amenity"><i class='bx bx-shower'></i>&nbsp;Hot water</div>
-            <div class="amenity"><i class='bx bx-car'></i>&nbsp;Parking</div>
-          </div>
-        </section>
-
+    <form id="enquiryForm" action="https://formspree.io/f/movpglyd" method="POST" autocomplete="off">
+      <div class="form-row">
+        <input name="name" type="text" placeholder="Your name" required>
+        <input name="phone" type="tel" placeholder="Phone" required>
       </div>
-
-      <!-- Right column: contact + quick facts -->
-      <aside class="contact-card">
-        <div class="card">
-          <h3>Request a tour</h3>
-          <p class="small">Fill the form and our agent will contact you within 24 hours.</p>
-          <form id="contactForm" action="mailto:amartaree@gmail.com" method="post" enctype="text/plain">
-            <input type="text" name="name" placeholder="Your name" required>
-            <input type="tel" name="phone" placeholder="Phone number" required>
-            <input type="email" name="email" placeholder="Email (optional)">
-            <textarea name="message" rows="4" placeholder="Message / preferred visit date"></textarea>
-            <button type="submit" class="btn btn-primary">Send Inquiry</button>
-          </form>
-
-          <div style="margin-top:0.8rem">
-            <div style="font-weight:700;margin-bottom:0.25rem">Quick facts</div>
-            <div style="color:var(--muted);font-size:0.95rem">Built: 2025 • Plot: 1.2 acres • Water: well & lake access</div>
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <!-- Map placeholder / location -->
-    <section style="margin-top:2rem;background:var(--card-bg);padding:1rem;border-radius:12px;box-shadow:0 10px 30px rgba(12,15,20,0.05)">
-      <div style="display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap">
-        <div>
-          <h3 style="margin-bottom:6px">Location</h3>
-          <p style="color:var(--muted);max-width:680px">Peaceful Cottage— approximate coordinates: 23°42'57.0"N, 87°42'40.8"E.</p>
-        </div>
-    <div style="width:320px;height:180px;border-radius:8px;overflow:hidden;">
-    <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3650.379698665103!2d87.711333!3d23.715833!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQyJzU3LjAiTiA4N8KwNDInNDAuOCJF!5e0!3m2!1sen!2sin!4v1739574720000!5m2!1sen!2sin"
-        width="100%"
-        height="100%"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-    </div>
+      <input name="email" type="email" placeholder="Email (optional)">
+      <select name="interest" required>
+        <option value="" disabled selected>Cottage details</option>
+        <optgroup label="Cottage">
+          <option value="ground">Ground Floor</option>
+          <option value="upper">Upper Floor</option>
+        </optgroup>
+        <option value="white">White Cottage</option>
+        <option value="full">Full Cottage</option>
+      </select>
+      <textarea name="message" rows="4" placeholder="Message / preferred visit date"></textarea>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">Send Enquiry</button>
+        <button type="button" class="btn-ghost" id="whatsappNow">WhatsApp</button>
       </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <div>© 2025 Amar Taree • <span style="color:var(--muted)">All rights reserved</span></div>
-      <div style="color:var(--muted)">Contact: amartaree@gmail.com • +91 987654321</div>
-    </div>
-  </footer>
-
-  <!-- Simple modal for contact -->
-  <div class="modal" id="modal">
-    <div class="panel">
-      <h3>Contact Agent</h3>
-      <p style="color:var(--muted);margin-bottom:8px">Call or WhatsApp to schedule a visit.</p>
-      <div style="display:flex;gap:8px;align-items:center">
-        <a class="btn btn-primary" href="tel:+9198xxxxxxx"><i class='bx bx-phone'></i> Call</a>
-        <a class="btn" style="background:transparent;border:1px solid #e6e9ef" href="https://wa.me/9198xxxxxxx" target="_blank"><i class='bx bxl-whatsapp'></i> WhatsApp</a>
-        <button class="btn" id="closeModal">Close</button>
-      </div>
-    </div>
+      <!-- message area -->
+      <div id="formMessage" style="margin-top:10px;font-weight:500;"></div>
+    </form>
   </div>
+</section>
 
+
+ <!-- Map / Location Section -->
+  <section class="map-section">
+    <div class="map-wrapper">
+      <div>
+        <h3>Location</h3>
+        <p>Peaceful Cottage — approximate coordinates: 23°42'57.0"N, 87°42'40.8"E.</p>
+      </div>
+
+      <div class="map-box">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3650.379698665103!2d87.711333!3d23.715833!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQyJzU3LjAiTiA4N8KwNDInNDAuOCJF!5e0!3m2!1sen!2sin!4v1739574720000!5m2!1sen!2sin"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-logo">
+      <img src="img/logo.png" alt="Amar Tori Logo">
+      <span>আমার তরী নিজের বাড়ি</span>
+    </div>
+
+    <p>© 2025 আমার তরী নিজের বাড়ি • All rights reserved</p>
+    <p>Contact: <a href="mailto:amartareenijerbari@gmail.com">amartareenijerbari@gmail.com</a> • +91 987654321</p>
+  </div>
+</footer>
+
+  <!-- ICONS / LIGHTBOX / SCRIPTS -->
+  <div id="lb" class="lightbox" aria-hidden="true"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    // Gallery thumbnails
-    const thumbs = document.getElementById('thumbs');
-    const mainImg = document.getElementById('mainImg').querySelector('img');
-    thumbs.addEventListener('click', e=>{
-      if(e.target && e.target.tagName === 'IMG'){
-        thumbs.querySelectorAll('img').forEach(i=>i.classList.remove('active'));
-        e.target.classList.add('active');
-        mainImg.src = e.target.src;
-      }
-    });
-
-    // Enlarge image (basic lightbox)
-    document.getElementById('mainImg').addEventListener('click',()=>{
-      const src = mainImg.src;
-      const light = document.createElement('div');
-      light.style.position='fixed';light.style.inset='0';light.style.background='rgba(0,0,0,0.8)';light.style.display='flex';light.style.alignItems='center';light.style.justifyContent='center';light.style.zIndex=9999;
-      const img = document.createElement('img');img.src = src;img.style.maxWidth='90%';img.style.maxHeight='90%';img.style.borderRadius='8px';
-      light.appendChild(img);
-      light.addEventListener('click',()=>document.body.removeChild(light));
-      document.body.appendChild(light);
-    });
-
-    // Modal open/close
-    const modal = document.getElementById('modal');
-    document.getElementById('contactBtn').addEventListener('click',()=>modal.classList.add('show'));
-    document.getElementById('closeModal').addEventListener('click',()=>modal.classList.remove('show'));
-    modal.addEventListener('click',(e)=>{ if(e.target===modal) modal.classList.remove('show') });
-
-// Ensure video plays correctly everywhere
-const vid = document.querySelector('.hero video');
-if (vid) {
-  vid.play().catch(() => {
-    // If autoplay is blocked (mobile/safari), unmute to enable play
-    vid.muted = true;
-    vid.play();
-  });
-}
-
+    (function(){
+      try {
+        emailjs.init({ publicKey: 'dtZnKDm9Yyr-AajoJ' });
+      } catch (e) {}
+    })();
   </script>
+  <script src="script.js"></script>
 </body>
 </html>
